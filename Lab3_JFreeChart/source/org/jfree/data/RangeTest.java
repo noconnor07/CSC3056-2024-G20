@@ -439,7 +439,24 @@ public class RangeTest{
 	        assertEquals("Expanded range should start at -1.0", -1.0, expanded.getLowerBound(), 0.000000001d);
 	        assertEquals("Expanded range should end at 6.0", 6.0, expanded.getUpperBound(), 0.000000001d);
 	    }
-	    
+
+	 @Test
+	    public void testCombineOneRangeInsideAnother() {
+	        Range range1 = new Range(2.0, 10.0);
+	        Range range2 = new Range(3.0, 8.0);
+	        Range combined = Range.combine(range1, range2);
+	        assertEquals("Combined range should start at 1.0", 1.0, combined.getLowerBound(), 0.000000001d); 
+	        assertEquals("Combined range should end at 10.0", 10.0, combined.getUpperBound(), 0.000000001d);
+	    }
+ 
+	    @Test
+	    public void testCombineIdenticalRanges() {
+	        Range range = new Range(5.0, 15.0);
+	        Range combined = Range.combine(range, range);
+	        assertEquals("Combined range should start at 1.0", 1.0, combined.getLowerBound(), 0.000000001d); 
+	        assertEquals("Combined range should end at 15.0", 15.0, combined.getUpperBound(), 0.000000001d);
+	    }
+	
 	  // Test for Shift(Range base, double delta)
 	    
 	    @Test
